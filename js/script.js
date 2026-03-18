@@ -38,3 +38,4 @@ function displayResult() {
     result.innerHTML = "<h2>It's a tie! 😎</h2>";
   }
 }
+// final version of quiz
