@@ -1,50 +1,40 @@
-console.log("script.js connected!");
-
-// store answers
 let answers = [];
 
-// select all question blocks
 const questionBlocks = document.querySelectorAll(".question-block");
 
 questionBlocks.forEach((block, index) => {
   const buttons = block.querySelectorAll(".answer-btn");
 
-  buttons.forEach((btn) => {
-    btn.addEventListener("click", () => {
+  buttons.forEach(button => {
+    button.addEventListener("click", () => {
 
-      // remove selected from all buttons in this question
-      buttons.forEach(b => b.classList.remove("selected"));
+      buttons.forEach(btn => btn.classList.remove("selected"));
 
-      // add selected to clicked
-      btn.classList.add("selected");
+      button.classList.add("selected");
 
-      // store answer
-      answers[index] = btn.getAttribute("data-value");
-
-      console.log(answers);
+      answers[index] = button.getAttribute("data-value");
     });
   });
 });
 
-// result button
 document.getElementById("result-btn").addEventListener("click", displayResult);
 
 function displayResult() {
-  let nyCount = 0;
-  let laCount = 0;
+  let ny = 0;
+  let la = 0;
 
   answers.forEach(answer => {
-    if (answer === "ny") nyCount++;
-    if (answer === "la") laCount++;
+    if (answer === "ny") ny++;
+    if (answer === "la") la++;
   });
 
-  const resultContainer = document.getElementById("result-container");
+  const result = document.getElementById("result-container");
 
-  if (nyCount > laCount) {
-    resultContainer.innerHTML = "<h2>You should live in New York 🗽</h2>";
-  } else if (laCount > nyCount) {
-    resultContainer.innerHTML = "<h2>You should live in Los Angeles 🌴</h2>";
+  if (ny > la) {
+    result.innerHTML = "<h2>You should live in New York 🗽</h2>";
+  } else if (la > ny) {
+    result.innerHTML = "<h2>You should live in Los Angeles 🌴</h2>";
   } else {
-    resultContainer.innerHTML = "<h2>It's a tie! You’d love both cities 😎</h2>";
+    result.innerHTML = "<h2>It's a tie! 😎</h2>";
   }
 }
